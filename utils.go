@@ -39,30 +39,17 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 	var secondSlice string
 	var thirdSlice string
 
-	if idx1 < idx2 {
-		if len(array[:idx1]) > 0 {
-			firstSlice = strings.Replace(fmt.Sprintf("%v ", array[:idx1]), "[", "", -1)
-			firstSlice = strings.Replace(firstSlice, "]", "", -1)
-		}
-		if len(array[idx1+1:idx2]) > 0 {
-			secondSlice = strings.Replace(fmt.Sprintf("%v ", array[idx1+1:idx2]), "[", "", -1)
-			secondSlice = strings.Replace(secondSlice, "]", "", -1)
-		}
-
-		thirdSlice = strings.Replace(fmt.Sprintf(" %v", array[idx2+1:]), "[", "", -1)
-		thirdSlice = strings.Replace(thirdSlice, "]", "", -1)
-	} else {
-		if len(array[:idx2]) > 0 {
-			firstSlice = strings.Replace(fmt.Sprintf("%v ", array[:idx2]), "[", "", -1)
-			firstSlice = strings.Replace(firstSlice, "]", "", -1)
-		}
-
-		secondSlice = strings.Replace(fmt.Sprintf(" %v ", array[idx2+1:idx1]), "[", "", -1)
-		secondSlice = strings.Replace(secondSlice, "]", "", -1)
-
-		thirdSlice = strings.Replace(fmt.Sprintf(" %v", array[idx1:]), "[", "", -1)
-		thirdSlice = strings.Replace(thirdSlice, "]", "", -1)
+	if len(array[:idx1]) > 0 {
+		firstSlice = strings.Replace(fmt.Sprintf("%v ", array[:idx1]), "[", "", -1)
+		firstSlice = strings.Replace(firstSlice, "]", "", -1)
 	}
+	if idx1 != idx2 && len(array[idx1+1:idx2]) > 0 {
+		secondSlice = strings.Replace(fmt.Sprintf("%v ", array[idx1+1:idx2]), "[", "", -1)
+		secondSlice = strings.Replace(secondSlice, "]", "", -1)
+	}
+
+	thirdSlice = strings.Replace(fmt.Sprintf(" %v", array[idx2+1:]), "[", "", -1)
+	thirdSlice = strings.Replace(thirdSlice, "]", "", -1)
 
 	var str string
 	switch c {
@@ -74,12 +61,19 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 			color.OpUnderscore.Sprint(color.Red.Sprint(array[idx2])) +
 			thirdSlice
 	case Green:
-		str = firstSlice +
-			color.OpUnderscore.Sprint(color.Green.Sprint(array[idx1])) +
-			" " +
-			secondSlice +
-			color.OpUnderscore.Sprint(color.Green.Sprint(array[idx2])) +
-			thirdSlice
+		if idx1 != idx2 {
+			str = firstSlice +
+				color.OpUnderscore.Sprint(color.Green.Sprint(array[idx1])) +
+				" " +
+				secondSlice +
+				color.OpUnderscore.Sprint(color.Green.Sprint(array[idx2])) +
+				thirdSlice
+		} else {
+			str = firstSlice +
+				color.OpUnderscore.Sprint(color.Green.Sprint(array[idx1])) +
+				" " +
+				thirdSlice
+		}
 	case White:
 		str = firstSlice +
 			color.OpUnderscore.Sprint(array[idx1]) +
