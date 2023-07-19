@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+	"time"
 
 	"github.com/gookit/color"
 )
@@ -78,4 +79,10 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 			secondSlice
 		fmt.Println(str)
 	}
+}
+
+func visualizeIteration(c Color, array []int, idx1, idx2 int) {
+	printColoredArray(c, array, idx1, idx2)
+	time.Sleep(time.Second)
+	clearConsole()
 }
