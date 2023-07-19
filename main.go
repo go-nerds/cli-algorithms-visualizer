@@ -27,7 +27,7 @@ func main() {
 	case "Bubble Sort":
 		bubbleSortVisualizer(arr)
 	case "Selection Sort":
-		// selectionSortVisualizer(arr)
+		selectionSortVisualizer(arr)
 	case "Merge Sort":
 		// mergeSortVisualizer(arr)
 	default:
