@@ -35,50 +35,61 @@ func clearConsole() {
 }
 
 func printColoredArray(c Color, array []int, idx1, idx2 int) {
+	var firstSlice string
+	var secondSlice string
+	var thirdSlice string
+
+	if idx1 < idx2 {
+		if len(array[:idx1]) > 0 {
+			firstSlice = strings.Replace(fmt.Sprintf("%v ", array[:idx1]), "[", "", -1)
+			firstSlice = strings.Replace(firstSlice, "]", "", -1)
+		}
+		if len(array[idx1+1:idx2]) > 0 {
+			secondSlice = strings.Replace(fmt.Sprintf("%v ", array[idx1+1:idx2]), "[", "", -1)
+			secondSlice = strings.Replace(secondSlice, "]", "", -1)
+		}
+
+		thirdSlice = strings.Replace(fmt.Sprintf(" %v", array[idx2+1:]), "[", "", -1)
+		thirdSlice = strings.Replace(thirdSlice, "]", "", -1)
+	} else {
+		if len(array[:idx2]) > 0 {
+			firstSlice = strings.Replace(fmt.Sprintf("%v ", array[:idx2]), "[", "", -1)
+			firstSlice = strings.Replace(firstSlice, "]", "", -1)
+		}
+
+		secondSlice = strings.Replace(fmt.Sprintf(" %v ", array[idx2+1:idx1]), "[", "", -1)
+		secondSlice = strings.Replace(secondSlice, "]", "", -1)
+
+		thirdSlice = strings.Replace(fmt.Sprintf(" %v", array[idx1:]), "[", "", -1)
+		thirdSlice = strings.Replace(thirdSlice, "]", "", -1)
+	}
+
+	var str string
 	switch c {
 	case Red:
-		var firstSlice string
-		if len(array[:idx1]) > 0 {
-			firstSlice = strings.Replace(fmt.Sprintf("%v ", array[:idx1]), "[", "", -1)
-			firstSlice = strings.Replace(firstSlice, "]", "", -1)
-		}
-		secondSlice := strings.Replace(fmt.Sprintf(" %v", array[idx2+1:]), "[", "", -1)
-		secondSlice = strings.Replace(secondSlice, "]", "", -1)
-		str := firstSlice +
-			color.OpUnderscore.Sprint(color.Red.Sprintf("%v", array[idx1])) +
+		str = firstSlice +
+			color.OpUnderscore.Sprint(color.Red.Sprint(array[idx1])) +
 			" " +
-			color.OpUnderscore.Sprint(color.Red.Sprintf("%v", array[idx2])) +
-			secondSlice
-		fmt.Print(str)
+			secondSlice +
+			color.OpUnderscore.Sprint(color.Red.Sprint(array[idx2])) +
+			thirdSlice
 	case Green:
-		var firstSlice string
-		if len(array[:idx1]) > 0 {
-			firstSlice = strings.Replace(fmt.Sprintf("%v ", array[:idx1]), "[", "", -1)
-			firstSlice = strings.Replace(firstSlice, "]", "", -1)
-		}
-		secondSlice := strings.Replace(fmt.Sprintf(" %v", array[idx2+1:]), "[", "", -1)
-		secondSlice = strings.Replace(secondSlice, "]", "", -1)
-		str := firstSlice +
-			color.OpUnderscore.Sprint(color.Green.Sprintf("%v", array[idx1])) +
+		str = firstSlice +
+			color.OpUnderscore.Sprint(color.Green.Sprint(array[idx1])) +
 			" " +
-			color.OpUnderscore.Sprint(color.Green.Sprintf("%v", array[idx2])) +
-			secondSlice
-		fmt.Print(str)
+			secondSlice +
+			color.OpUnderscore.Sprint(color.Green.Sprint(array[idx2])) +
+			thirdSlice
 	case White:
-		var firstSlice string
-		if len(array[:idx1]) > 0 {
-			firstSlice = strings.Replace(fmt.Sprintf("%v ", array[:idx1]), "[", "", -1)
-			firstSlice = strings.Replace(firstSlice, "]", "", -1)
-		}
-		secondSlice := strings.Replace(fmt.Sprintf(" %v", array[idx2+1:]), "[", "", -1)
-		secondSlice = strings.Replace(secondSlice, "]", "", -1)
-		str := firstSlice +
+		str = firstSlice +
 			color.OpUnderscore.Sprint(array[idx1]) +
 			" " +
+			secondSlice +
 			color.OpUnderscore.Sprint(array[idx2]) +
-			secondSlice
-		fmt.Print(str)
+			thirdSlice
 	}
+
+	fmt.Print(str)
 }
 
 func visualizeIteration(c Color, array []int, idx1, idx2 int) {
