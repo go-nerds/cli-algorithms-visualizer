@@ -64,11 +64,12 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 			firstSlice = strings.Replace(fmt.Sprintf("%v ", array[:idx1]), "[", "", -1)
 			firstSlice = strings.Replace(firstSlice, "]", "", -1)
 		}
-		secondSlice := strings.Replace(fmt.Sprintf(" %v", array[idx2:]), "[", "", -1)
+		secondSlice := strings.Replace(fmt.Sprintf(" %v", array[idx2+1:]), "[", "", -1)
 		secondSlice = strings.Replace(secondSlice, "]", "", -1)
 		str := firstSlice +
-			color.OpUnderscore.Sprint(color.Red.Sprintf("%v ", array[idx1])) +
-			color.OpUnderscore.Sprint(color.Red.Sprintf("%v ", array[idx2])) +
+			color.OpUnderscore.Sprint(color.Red.Sprintf("%v", array[idx1])) +
+			" " +
+			color.OpUnderscore.Sprint(color.Red.Sprintf("%v", array[idx2])) +
 			secondSlice
 		fmt.Println(str)
 	case Green:
@@ -77,11 +78,12 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 			firstSlice = strings.Replace(fmt.Sprintf("%v ", array[:idx1]), "[", "", -1)
 			firstSlice = strings.Replace(firstSlice, "]", "", -1)
 		}
-		secondSlice := strings.Replace(fmt.Sprintf(" %v", array[idx2:]), "[", "", -1)
+		secondSlice := strings.Replace(fmt.Sprintf(" %v", array[idx2+1:]), "[", "", -1)
 		secondSlice = strings.Replace(secondSlice, "]", "", -1)
 		str := firstSlice +
-			color.OpUnderscore.Sprint(color.Green.Sprintf("%v ", array[idx1])) +
-			color.OpUnderscore.Sprint(color.Green.Sprintf("%v ", array[idx2])) +
+			color.OpUnderscore.Sprint(color.Green.Sprintf("%v", array[idx1])) +
+			" " +
+			color.OpUnderscore.Sprint(color.Green.Sprintf("%v", array[idx2])) +
 			secondSlice
 		fmt.Println(str)
 	case White:
@@ -90,7 +92,7 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 			firstSlice = strings.Replace(fmt.Sprintf("%v ", array[:idx1]), "[", "", -1)
 			firstSlice = strings.Replace(firstSlice, "]", "", -1)
 		}
-		secondSlice := strings.Replace(fmt.Sprintf(" %v", array[idx2:]), "[", "", -1)
+		secondSlice := strings.Replace(fmt.Sprintf(" %v", array[idx2+1:]), "[", "", -1)
 		secondSlice = strings.Replace(secondSlice, "]", "", -1)
 		str := firstSlice +
 			color.OpUnderscore.Sprint(array[idx1]) +
