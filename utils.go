@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"os"
 	"os/exec"
+	"runtime"
 	"strings"
 	"time"
 
@@ -28,10 +29,18 @@ func generateRandomArray(size int) []int {
 }
 
 func clearConsole() {
-	// TODO: Add platform-specific code to clear the console or scroll up
-	cmd := exec.Command("clear")
-	cmd.Stdout = os.Stdout
-	cmd.Run()
+	switch runtime.GOOS {
+	case "linux", "darwin": // Linux or Mac
+		cmd := exec.Command("clear")
+		cmd.Stdout = os.Stdout
+		cmd.Run()
+	case "windows":
+		cmd := exec.Command("cmd", "/c", "cls") // Use "cls" command to clear console on Windows
+		cmd.Stdout = os.Stdout
+		cmd.Run()
+	default:
+		fmt.Println("Unsupported platform. Cannot clear console.")
+	}
 }
 
 func printColoredArray(c Color, array []int, idx1, idx2 int) {
