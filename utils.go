@@ -49,7 +49,7 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 			" " +
 			color.OpUnderscore.Sprint(color.Red.Sprintf("%v", array[idx2])) +
 			secondSlice
-		fmt.Println(str)
+		fmt.Print(str)
 	case Green:
 		var firstSlice string
 		if len(array[:idx1]) > 0 {
@@ -63,7 +63,7 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 			" " +
 			color.OpUnderscore.Sprint(color.Green.Sprintf("%v", array[idx2])) +
 			secondSlice
-		fmt.Println(str)
+		fmt.Print(str)
 	case White:
 		var firstSlice string
 		if len(array[:idx1]) > 0 {
@@ -77,7 +77,7 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 			" " +
 			color.OpUnderscore.Sprint(array[idx2]) +
 			secondSlice
-		fmt.Println(str)
+		fmt.Print(str)
 	}
 }
 
