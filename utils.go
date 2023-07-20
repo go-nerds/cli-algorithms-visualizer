@@ -92,7 +92,7 @@ func printColoLightYellowArray(c Color, array []int, idx1, idx2 int) {
 			thirdSlice
 	}
 
-	fmt.Print(str)
+	fmt.Printf("[ %v ]", str)
 }
 
 func visualizeIteration(c Color, array []int, idx1, idx2 int, delay time.Duration) {
