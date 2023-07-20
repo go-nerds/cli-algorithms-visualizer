@@ -12,7 +12,7 @@ func main() {
 	// Prompt user to select the sorting algorithm
 	prompt := promptui.Select{
 		Label: "Select Sorting Algorithm",
-		Items: []string{"Bubble Sort", "Selection Sort", "Insertion Sort"},
+		Items: []string{"Bubble Sort", "Selection Sort", "Insertion Sort", "Gnome Sort", "Cocktail Shaker Sort"},
 	}
 
 	_, algorithm, err := prompt.Run()
@@ -30,6 +30,10 @@ func main() {
 		selectionSortVisualizer(arr)
 	case "Insertion Sort":
 		insertionSortVisualizer(arr)
+	case "Gnome Sort":
+		gnomeSortVisualizer(arr)
+	case "Cocktail Shaker Sort":
+		cocktailShakerSortVisualizer(arr)
 	default:
 		fmt.Println("Invalid selection")
 		return
