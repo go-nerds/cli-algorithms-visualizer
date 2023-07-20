@@ -95,8 +95,8 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 	fmt.Print(str)
 }
 
-func visualizeIteration(c Color, array []int, idx1, idx2 int) {
+func visualizeIteration(c Color, array []int, idx1, idx2 int, delay time.Duration) {
 	printColoredArray(c, array, idx1, idx2)
-	time.Sleep(time.Second)
+	time.Sleep(delay)
 	clearConsole()
 }

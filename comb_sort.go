@@ -1,6 +1,8 @@
 package main
 
-func combSortVisualizer(arr []int) {
+import "time"
+
+func combSortVisualizer(arr []int, delay time.Duration) {
 	n := len(arr)
 	gap := n
 	swapped := true
@@ -10,11 +12,11 @@ func combSortVisualizer(arr []int) {
 		swapped = false
 
 		for i := 0; i < n-gap; i++ {
-			visualizeIteration(White, arr, i, i+gap)
+			visualizeIteration(White, arr, i, i+gap, delay)
 			if arr[i] > arr[i+gap] {
-				visualizeIteration(Red, arr, i, i+gap)
+				visualizeIteration(Red, arr, i, i+gap, delay)
 				arr[i], arr[i+gap] = arr[i+gap], arr[i]
-				visualizeIteration(Green, arr, i, i+gap)
+				visualizeIteration(Green, arr, i, i+gap, delay)
 				swapped = true
 			}
 		}

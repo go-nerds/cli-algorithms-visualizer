@@ -5,16 +5,16 @@ import (
 	"time"
 )
 
-func selectionSortVisualizer(arr []int) {
+func selectionSortVisualizer(arr []int, delay time.Duration) {
 	for i := 0; i < len(arr); i++ {
 		min := i
 		for j := i + 1; j < len(arr); j++ {
 			printColoredArray(White, arr, i, j)
 			fmt.Printf(" // min = %d\n", arr[min])
-			time.Sleep(time.Second)
+			time.Sleep(delay)
 			clearConsole()
 			if arr[j] < arr[min] {
-				visualizeIteration(Red, arr, i, j)
+				visualizeIteration(Red, arr, i, j, delay)
 				min = j
 			}
 		}
@@ -22,7 +22,7 @@ func selectionSortVisualizer(arr []int) {
 		arr[i], arr[min] = arr[min], arr[i]
 		printColoredArray(Green, arr, i, min)
 		fmt.Print(swapStr)
-		time.Sleep(time.Second * 2)
+		time.Sleep(delay)
 		clearConsole()
 	}
 }
