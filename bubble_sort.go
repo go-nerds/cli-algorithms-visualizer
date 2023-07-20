@@ -8,9 +8,9 @@ func bubbleSortVisualizer(arr []int, delay time.Duration) {
 		for j := 0; j < n-i-1; j++ {
 			visualizeIteration(White, arr, j, j+1, delay)
 			if arr[j] > arr[j+1] {
-				visualizeIteration(Red, arr, j, j+1, delay)
+				visualizeIteration(LightYellow, arr, j, j+1, delay)
 				arr[j], arr[j+1] = arr[j+1], arr[j]
-				visualizeIteration(Green, arr, j, j+1, delay)
+				visualizeIteration(LightBlue, arr, j, j+1, delay)
 			}
 		}
 	}

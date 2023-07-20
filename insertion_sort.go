@@ -10,13 +10,13 @@ func insertionSortVisualizer(arr []int, delay time.Duration) {
 		j := i
 		visualizeIteration(White, arr, j-1, j, delay)
 		for j > 0 && arr[j] < arr[j-1] {
-			printColoredArray(Red, arr, j-1, j)
+			printColoLightYellowArray(LightYellow, arr, j-1, j)
 			fmt.Printf(" // %d is smaller than %d\n", arr[j], arr[j-1])
 			time.Sleep(time.Second * 1)
 			clearConsole()
 			str := fmt.Sprintf(" // swap %d and %d\n", arr[j], arr[j-1])
 			arr[j], arr[j-1] = arr[j-1], arr[j]
-			printColoredArray(Green, arr, j-1, j)
+			printColoLightYellowArray(LightBlue, arr, j-1, j)
 			fmt.Print(str)
 			time.Sleep(time.Second * 1)
 			clearConsole()

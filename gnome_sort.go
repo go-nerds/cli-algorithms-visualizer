@@ -10,9 +10,9 @@ func gnomeSortVisualizer(arr []int, delay time.Duration) {
 			visualizeIteration(White, arr, i-1, i, delay)
 			i++
 		} else {
-			visualizeIteration(Red, arr, i-1, i, delay)
+			visualizeIteration(LightYellow, arr, i-1, i, delay)
 			arr[i], arr[i-1] = arr[i-1], arr[i]
-			visualizeIteration(Green, arr, i-1, i, delay)
+			visualizeIteration(LightBlue, arr, i-1, i, delay)
 			i--
 			if i == 0 {
 				i = 1

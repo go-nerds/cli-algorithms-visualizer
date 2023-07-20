@@ -16,8 +16,8 @@ type Color int
 
 const (
 	White Color = iota
-	Red
-	Green
+	LightYellow
+	LightBlue
 )
 
 func generateRandomArray(size int) []int {
@@ -43,7 +43,7 @@ func clearConsole() {
 	}
 }
 
-func printColoredArray(c Color, array []int, idx1, idx2 int) {
+func printColoLightYellowArray(c Color, array []int, idx1, idx2 int) {
 	var firstSlice string
 	var secondSlice string
 	var thirdSlice string
@@ -62,24 +62,24 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 
 	var str string
 	switch c {
-	case Red:
+	case LightYellow:
 		str = firstSlice +
-			color.OpUnderscore.Sprint(color.Red.Sprint(array[idx1])) +
+			color.OpUnderscore.Sprint(color.LightYellow.Sprint(array[idx1])) +
 			" " +
 			secondSlice +
-			color.OpUnderscore.Sprint(color.Red.Sprint(array[idx2])) +
+			color.OpUnderscore.Sprint(color.LightYellow.Sprint(array[idx2])) +
 			thirdSlice
-	case Green:
+	case LightBlue:
 		if idx1 != idx2 {
 			str = firstSlice +
-				color.OpUnderscore.Sprint(color.Green.Sprint(array[idx1])) +
+				color.OpUnderscore.Sprint(color.LightBlue.Sprint(array[idx1])) +
 				" " +
 				secondSlice +
-				color.OpUnderscore.Sprint(color.Green.Sprint(array[idx2])) +
+				color.OpUnderscore.Sprint(color.LightBlue.Sprint(array[idx2])) +
 				thirdSlice
 		} else {
 			str = firstSlice +
-				color.OpUnderscore.Sprint(color.Green.Sprint(array[idx1])) +
+				color.OpUnderscore.Sprint(color.LightBlue.Sprint(array[idx1])) +
 				" " +
 				thirdSlice
 		}
@@ -96,7 +96,7 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 }
 
 func visualizeIteration(c Color, array []int, idx1, idx2 int, delay time.Duration) {
-	printColoredArray(c, array, idx1, idx2)
+	printColoLightYellowArray(c, array, idx1, idx2)
 	time.Sleep(delay)
 	clearConsole()
 }
