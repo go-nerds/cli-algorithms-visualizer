@@ -19,6 +19,7 @@ func main() {
 			"Gnome Sort",
 			"Cocktail Shaker Sort",
 			"Comb Sort",
+			"Odd-Even Sort",
 		},
 	}
 
@@ -43,6 +44,8 @@ func main() {
 		cocktailShakerSortVisualizer(arr)
 	case "Comb Sort":
 		combSortVisualizer(arr)
+	case "Odd-Even Sort":
+		oddEvenSortVisualizer(arr)
 	default:
 		fmt.Println("Invalid selection")
 		return
