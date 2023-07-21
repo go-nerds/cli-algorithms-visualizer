@@ -24,3 +24,5 @@ This project is an algorithms visualizer implemented in Go. It allows you to obs
    ./<executable_file_name> // Linux || Mac OS
    ```
 ## LICENSE
+
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/go-nerds/cli-algorithms-visualizer/blob/main/LICENSE) file for details.
