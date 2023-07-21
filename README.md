@@ -20,4 +20,7 @@ This project is an algorithms visualizer implemented in Go. It allows you to obs
    ```
 3. Run the executable file:
    ```bash
-   
+   .\<executable_file_name>.exe // Windows OS
+   ./<executable_file_name> // Linux || Mac OS
+   ```
+## LICENSE
