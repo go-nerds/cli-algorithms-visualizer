@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -10,16 +9,9 @@ func insertionSortVisualizer(arr []int, delay time.Duration) {
 		j := i
 		visualizeIteration(White, arr, j-1, j, delay)
 		for j > 0 && arr[j] < arr[j-1] {
-			printColoredArray(LightYellow, arr, j-1, j)
-			fmt.Printf(" // %d is smaller than %d\n", arr[j], arr[j-1])
-			time.Sleep(time.Second * 1)
-			clearConsole()
-			str := fmt.Sprintf(" // swap %d and %d\n", arr[j], arr[j-1])
+			visualizeIteration(LightYellow, arr, j-1, j, delay)
 			arr[j], arr[j-1] = arr[j-1], arr[j]
-			printColoredArray(LightBlue, arr, j-1, j)
-			fmt.Print(str)
-			time.Sleep(time.Second * 1)
-			clearConsole()
+			visualizeIteration(LightBlue, arr, j-1, j, delay)
 			j--
 		}
 	}
