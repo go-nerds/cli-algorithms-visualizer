@@ -1,7 +1,5 @@
 # cli-algorithms-visualizer
 
-![Sorting Algorithms Visualizer GIF](path/to/your/gif.gif)
-
 ## Introduction
 
 This project is an algorithms visualizer implemented in Go. It allows you to observe various algorithms in action. The visualizer provides a graphical representation of each step, making it easier to understand how the algorithms work.
