@@ -22,6 +22,7 @@ func main() {
 			"Cocktail Shaker Sort",
 			"Comb Sort",
 			"Odd-Even Sort",
+			"Quick Sort",
 		},
 	}
 
@@ -126,6 +127,10 @@ func printAlgorithmDescription(algorithm string) {
 		fmt.Println(color.Cyan.Sprint("Odd-Even Sort is an in-place comparison-based sorting algorithm. It works by repeatedly comparing and swapping"))
 		fmt.Println(color.Cyan.Sprint("adjacent elements at even and odd indices. The process continues until the list is sorted. Odd-Even Sort is known"))
 		fmt.Println(color.Cyan.Sprint("for its simplicity but is not very efficient for large lists."))
+	case "Quick Sort":
+		color.Bold.Println(color.Yellow.Sprint("Quick Sort"))
+		fmt.Println()
+		fmt.Println(color.Cyan.Sprint("The quick sort algorithm falls under the divide and conquer class of algorithms, where we break (divide) a problem into smaller chunks that are much simpler to solve (conquer). In this case, an unsorted array is broken into sub-arrays that are partially sorted, until all elements in the list are in the right position, by which time our unsorted list will have become sorted."))
 	default:
 		fmt.Println("Invalid selection")
 	}
@@ -147,6 +152,8 @@ func runAlgorithm(algorithm string, arr []int, delay time.Duration) {
 		combSortVisualizer(arr, delay)
 	case "Odd-Even Sort":
 		oddEvenSortVisualizer(arr, delay)
+	case "Quick Sort":
+		quickSort(arr, delay)
 	default:
 		fmt.Println("Invalid selection")
 	}
