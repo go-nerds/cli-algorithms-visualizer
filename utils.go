@@ -30,12 +30,12 @@ func generateRandomArray(size int) []int {
 
 func clearConsole() {
 	switch runtime.GOOS {
-	case "linux", "darwin": // Linux or Mac
+	case "linux", "darwin":
 		cmd := exec.Command("clear")
 		cmd.Stdout = os.Stdout
 		cmd.Run()
 	case "windows":
-		cmd := exec.Command("cmd", "/c", "cls") // Use "cls" command to clear console on Windows
+		cmd := exec.Command("cmd", "/c", "cls")
 		cmd.Stdout = os.Stdout
 		cmd.Run()
 	default:
