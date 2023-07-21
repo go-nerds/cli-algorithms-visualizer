@@ -56,9 +56,10 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 		secondSlice = strings.Replace(fmt.Sprintf("%v ", array[idx1+1:idx2]), "[", "", -1)
 		secondSlice = strings.Replace(secondSlice, "]", "", -1)
 	}
-
-	thirdSlice = strings.Replace(fmt.Sprintf(" %v", array[idx2+1:]), "[", "", -1)
-	thirdSlice = strings.Replace(thirdSlice, "]", "", -1)
+	if len(array[idx2+1:]) > 0 {
+		thirdSlice = strings.Replace(fmt.Sprintf(" %v", array[idx2+1:]), "[", "", -1)
+		thirdSlice = strings.Replace(thirdSlice, "]", "", -1)
+	}
 
 	var str string
 	switch c {
