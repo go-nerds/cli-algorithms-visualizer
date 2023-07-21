@@ -66,9 +66,9 @@ func main() {
 		case "Medium":
 			delay = time.Second
 		case "Fast":
-			delay = time.Second / 2
+			delay = time.Second / 3
 		case "Very Fast":
-			delay = time.Second / 5
+			delay = time.Second / 6
 		default:
 			delay = time.Second
 		}
