@@ -43,7 +43,7 @@ func clearConsole() {
 	}
 }
 
-func printColoLightYellowArray(c Color, array []int, idx1, idx2 int) {
+func printColoredArray(c Color, array []int, idx1, idx2 int) {
 	var firstSlice string
 	var secondSlice string
 	var thirdSlice string
@@ -96,7 +96,7 @@ func printColoLightYellowArray(c Color, array []int, idx1, idx2 int) {
 }
 
 func visualizeIteration(c Color, array []int, idx1, idx2 int, delay time.Duration) {
-	printColoLightYellowArray(c, array, idx1, idx2)
+	printColoredArray(c, array, idx1, idx2)
 	time.Sleep(delay)
 	clearConsole()
 }
