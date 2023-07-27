@@ -44,7 +44,7 @@ func printColoredArray(array []int, idx1, idx2 int) {
 		} else if idx2 == i {
 			fmt.Print(color.OpUnderscore.Sprint(color.LightYellow.Sprint(array[idx2]), " "))
 		} else {
-			fmt.Print(color.Sprint(array[i], " "))
+			fmt.Print(array[i], " ")
 		}
 	}
 	fmt.Println("]")
