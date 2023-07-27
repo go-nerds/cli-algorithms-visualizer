@@ -6,7 +6,6 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
-	"strings"
 	"time"
 
 	"github.com/gookit/color"
@@ -44,56 +43,17 @@ func clearConsole() {
 }
 
 func printColoredArray(c Color, array []int, idx1, idx2 int) {
-	var firstSlice string
-	var secondSlice string
-	var thirdSlice string
-
-	if len(array[:idx1]) > 0 {
-		firstSlice = strings.Replace(fmt.Sprintf("%v ", array[:idx1]), "[", "", -1)
-		firstSlice = strings.Replace(firstSlice, "]", "", -1)
-	}
-	if idx1 != idx2 && len(array[idx1+1:idx2]) > 0 {
-		secondSlice = strings.Replace(fmt.Sprintf("%v ", array[idx1+1:idx2]), "[", "", -1)
-		secondSlice = strings.Replace(secondSlice, "]", "", -1)
-	}
-	if len(array[idx2+1:]) > 0 {
-		thirdSlice = strings.Replace(fmt.Sprintf(" %v", array[idx2+1:]), "[", "", -1)
-		thirdSlice = strings.Replace(thirdSlice, "]", "", -1)
-	}
-
-	var str string
-	switch c {
-	case LightYellow:
-		str = firstSlice +
-			color.OpUnderscore.Sprint(color.LightYellow.Sprint(array[idx1])) +
-			" " +
-			secondSlice +
-			color.OpUnderscore.Sprint(color.LightYellow.Sprint(array[idx2])) +
-			thirdSlice
-	case LightBlue:
-		if idx1 != idx2 {
-			str = firstSlice +
-				color.OpUnderscore.Sprint(color.LightBlue.Sprint(array[idx1])) +
-				" " +
-				secondSlice +
-				color.OpUnderscore.Sprint(color.LightBlue.Sprint(array[idx2])) +
-				thirdSlice
+	fmt.Print("[")
+	for i, _ := range array {
+		if idx1 == i {
+			fmt.Print(color.OpUnderscore.Sprint(color.LightYellow.Sprint(array[idx1]), " "))
+		} else if idx2 == i {
+			fmt.Print(color.OpUnderscore.Sprint(color.LightYellow.Sprint(array[idx2]), " "))
 		} else {
-			str = firstSlice +
-				color.OpUnderscore.Sprint(color.LightBlue.Sprint(array[idx1])) +
-				" " +
-				thirdSlice
+			fmt.Print(color.OpUnderscore.Sprint(array[i], " "))
 		}
-	case White:
-		str = firstSlice +
-			color.OpUnderscore.Sprint(array[idx1]) +
-			" " +
-			secondSlice +
-			color.OpUnderscore.Sprint(array[idx2]) +
-			thirdSlice
 	}
-
-	fmt.Printf("[ %v ]", str)
+	fmt.Println("]")
 }
 
 func visualizeIteration(c Color, array []int, idx1, idx2 int, delay time.Duration) {
