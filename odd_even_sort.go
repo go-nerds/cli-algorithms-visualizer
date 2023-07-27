@@ -9,21 +9,21 @@ func oddEvenSortVisualizer(arr []int, delay time.Duration) {
 	for !sorted {
 		sorted = true
 		for i := 1; i <= n-2; i += 2 {
-			visualizeIteration(White, arr, i, i+1, delay)
+			visualizeIteration(arr, i, i+1, delay)
 			if arr[i] > arr[i+1] {
-				visualizeIteration(LightYellow, arr, i, i+1, delay)
+				visualizeIteration(arr, i, i+1, delay)
 				arr[i], arr[i+1] = arr[i+1], arr[i]
-				visualizeIteration(LightBlue, arr, i, i+1, delay)
+				visualizeIteration(arr, i, i+1, delay)
 				sorted = false
 			}
 		}
 
 		for i := 0; i <= n-2; i += 2 {
-			visualizeIteration(White, arr, i, i+1, delay)
+			visualizeIteration(arr, i, i+1, delay)
 			if arr[i] > arr[i+1] {
-				visualizeIteration(LightYellow, arr, i, i+1, delay)
+				visualizeIteration(arr, i, i+1, delay)
 				arr[i], arr[i+1] = arr[i+1], arr[i]
-				visualizeIteration(LightBlue, arr, i, i+1, delay)
+				visualizeIteration(arr, i, i+1, delay)
 				sorted = false
 			}
 		}

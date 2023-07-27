@@ -13,12 +13,6 @@ import (
 
 type Color int
 
-const (
-	White Color = iota
-	LightYellow
-	LightBlue
-)
-
 func generateRandomArray(size int) []int {
 	arr := make([]int, size)
 	for i := 0; i < len(arr); i++ {
@@ -42,7 +36,7 @@ func clearConsole() {
 	}
 }
 
-func printColoredArray(c Color, array []int, idx1, idx2 int) {
+func printColoredArray(array []int, idx1, idx2 int) {
 	fmt.Print("[")
 	for i, _ := range array {
 		if idx1 == i {
@@ -50,14 +44,14 @@ func printColoredArray(c Color, array []int, idx1, idx2 int) {
 		} else if idx2 == i {
 			fmt.Print(color.OpUnderscore.Sprint(color.LightYellow.Sprint(array[idx2]), " "))
 		} else {
-			fmt.Print(color.OpUnderscore.Sprint(array[i], " "))
+			fmt.Print(color.Sprint(array[i], " "))
 		}
 	}
 	fmt.Println("]")
 }
 
-func visualizeIteration(c Color, array []int, idx1, idx2 int, delay time.Duration) {
-	printColoredArray(c, array, idx1, idx2)
+func visualizeIteration(array []int, idx1, idx2 int, delay time.Duration) {
+	printColoredArray(array, idx1, idx2)
 	time.Sleep(delay)
 	clearConsole()
 }

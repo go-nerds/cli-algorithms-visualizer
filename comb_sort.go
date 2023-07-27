@@ -12,11 +12,11 @@ func combSortVisualizer(arr []int, delay time.Duration) {
 		swapped = false
 
 		for i := 0; i < n-gap; i++ {
-			visualizeIteration(White, arr, i, i+gap, delay)
+			visualizeIteration(arr, i, i+gap, delay)
 			if arr[i] > arr[i+gap] {
-				visualizeIteration(LightYellow, arr, i, i+gap, delay)
+				visualizeIteration(arr, i, i+gap, delay)
 				arr[i], arr[i+gap] = arr[i+gap], arr[i]
-				visualizeIteration(LightBlue, arr, i, i+gap, delay)
+				visualizeIteration(arr, i, i+gap, delay)
 				swapped = true
 			}
 		}
