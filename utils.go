@@ -38,7 +38,7 @@ func clearConsole() {
 
 func printColoredArray(array []int, idx1, idx2 int) {
 	fmt.Print("[")
-	for i, _ := range array {
+	for i := range array {
 		if idx1 == i {
 			fmt.Print(color.OpUnderscore.Sprint(color.LightYellow.Sprint(array[idx1]), " "))
 		} else if idx2 == i {
