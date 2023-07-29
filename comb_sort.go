@@ -2,7 +2,7 @@ package main
 
 import "time"
 
-func combSortVisualizer(arr []int, delay time.Duration) {
+func combSortVisualizer(arr []int, displayType string, delay time.Duration) {
 	n := len(arr)
 	gap := n
 	swapped := true
@@ -12,11 +12,11 @@ func combSortVisualizer(arr []int, delay time.Duration) {
 		swapped = false
 
 		for i := 0; i < n-gap; i++ {
-			visualizeIteration(arr, i, i+gap, delay)
+			visualizeIteration(arr, i, i+gap, displayType, delay)
 			if arr[i] > arr[i+gap] {
-				visualizeIteration(arr, i, i+gap, delay)
+				visualizeIteration(arr, i, i+gap, displayType, delay)
 				arr[i], arr[i+gap] = arr[i+gap], arr[i]
-				visualizeIteration(arr, i, i+gap, delay)
+				visualizeIteration(arr, i, i+gap, displayType, delay)
 				swapped = true
 			}
 		}

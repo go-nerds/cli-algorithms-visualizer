@@ -26,6 +26,7 @@ type options struct {
 func main() {
 
 	clearConsole()
+	handleInterrupt()
 
 	arr := generateRandomArray(10)
 	fmt.Println("Initial array:", arr)
@@ -86,6 +87,19 @@ func main() {
 		return
 	}
 
+	clearConsole()
+
+	displayPrompt := promptui.Select{
+		Label: "Select Type of displaying",
+		Items: []string{"Array", "Graph"},
+	}
+
+	_, displayType, err := displayPrompt.Run()
+	if err != nil {
+		fmt.Printf("Prompt failed %v\n", err)
+		return
+	}
+
 	switch action {
 	case "Description":
 		printAlgorithmDescription(algorithms[i].Uuid)
@@ -117,29 +131,29 @@ func main() {
 
 		clearConsole()
 
-		runAlgorithm(algorithms[i].Uuid, arr, delay)
+		runAlgorithm(algorithms[i].Uuid, arr, displayType, delay)
 	default:
 		fmt.Println("Invalid choice")
 		return
 	}
 }
 
-func runAlgorithm(algorithm int, arr []int, delay time.Duration) {
+func runAlgorithm(algorithm int, arr []int, displayType string, delay time.Duration) {
 	switch algorithm {
 	case BubbleSort:
-		bubbleSortVisualizer(arr, delay)
+		bubbleSortVisualizer(arr, displayType, delay)
 	case SelectionSort:
-		selectionSortVisualizer(arr, delay)
+		selectionSortVisualizer(arr, displayType, delay)
 	case InsertionSort:
-		insertionSortVisualizer(arr, delay)
+		insertionSortVisualizer(arr, displayType, delay)
 	case GnomeSort:
-		gnomeSortVisualizer(arr, delay)
+		gnomeSortVisualizer(arr, displayType, delay)
 	case CocktailShakerSort:
-		cocktailShakerSortVisualizer(arr, delay)
+		cocktailShakerSortVisualizer(arr, displayType, delay)
 	case CombSort:
-		combSortVisualizer(arr, delay)
+		combSortVisualizer(arr, displayType, delay)
 	case OddEvenSort:
-		oddEvenSortVisualizer(arr, delay)
+		oddEvenSortVisualizer(arr, displayType, delay)
 	default:
 		fmt.Println("Invalid selection")
 	}
