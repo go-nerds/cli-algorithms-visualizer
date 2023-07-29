@@ -67,9 +67,12 @@ func handleInterrupt() {
 	}()
 }
 
-func visualizeIteration(array []int, idx1, idx2 int, delay time.Duration) {
-	printColoredArray(array, idx1, idx2)
-	printGraph(array)
+func visualizeIteration(array []int, idx1 int, idx2 int, displayType string, delay time.Duration) {
+	if displayType == "Graph" {
+		printGraph(array)
+	} else if displayType == "Array" {
+		printColoredArray(array, idx1, idx2)
+	}
 	time.Sleep(delay)
 	clearConsole()
 }
