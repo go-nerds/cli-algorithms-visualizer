@@ -5,10 +5,14 @@ import (
 	"math/rand"
 	"os"
 	"os/exec"
+	"os/signal"
 	"runtime"
+	"strconv"
+	"syscall"
 	"time"
 
 	"github.com/gookit/color"
+	"github.com/pterm/pterm"
 )
 
 type Color int
@@ -48,12 +52,43 @@ func printColoredArray(array []int, idx1, idx2 int) {
 		}
 	}
 	fmt.Println("]")
+	fmt.Println()
+
+}
+
+func handleInterrupt() {
+	channel := make(chan os.Signal, 1)
+	signal.Notify(channel, os.Interrupt, syscall.SIGTERM)
+	go func() {
+		<-channel
+		clearConsole()
+		fmt.Println("Exiting.")
+		os.Exit(0)
+	}()
 }
 
 func visualizeIteration(array []int, idx1, idx2 int, delay time.Duration) {
 	printColoredArray(array, idx1, idx2)
+	printGraph(array)
 	time.Sleep(delay)
 	clearConsole()
+}
+
+func printGraph(array []int) {
+	area, _ := pterm.DefaultArea.Start()
+	defer area.Stop()
+
+	bars := pterm.Bars{}
+
+	for i, data := range array {
+		bar := pterm.Bar{Label: strconv.Itoa(i), Value: data}
+		bars = append(bars, bar)
+	}
+
+	barchart := pterm.DefaultBarChart.WithBars(bars)
+
+	content, _ := barchart.WithWidth(35).WithShowValue().Srender()
+	area.Update(content)
 }
 
 func printAlgorithmDescription(algorithm int) {

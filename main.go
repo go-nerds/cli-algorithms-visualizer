@@ -26,6 +26,7 @@ type options struct {
 func main() {
 
 	clearConsole()
+	handleInterrupt()
 
 	arr := generateRandomArray(10)
 	fmt.Println("Initial array:", arr)
