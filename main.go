@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"strings"
-
 	"time"
 
 	"github.com/manifoldco/promptui"
