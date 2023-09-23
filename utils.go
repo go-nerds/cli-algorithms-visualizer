@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"math/rand"
 	"os"
 	"os/exec"
 	"os/signal"
@@ -18,14 +17,6 @@ import (
 )
 
 type Color int
-
-func generateRandomArray(size int) []int {
-	arr := make([]int, size)
-	for i := 0; i < len(arr); i++ {
-		arr[i] = rand.Intn(100)
-	}
-	return arr
-}
 
 func clearConsole() {
 	switch runtime.GOOS {
