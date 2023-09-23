@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
+
 	"time"
 
 	"github.com/manifoldco/promptui"
@@ -24,11 +27,13 @@ type options struct {
 }
 
 func main() {
-
 	clearConsole()
 	handleInterrupt()
 
-	arr := generateRandomArray(10)
+	r := bufio.NewReader(os.Stdin)
+	n := getSliceSize(r)
+	arr := generateSlice(r, n)
+
 	fmt.Println("Initial array:", arr)
 
 	algorithms := []options{
@@ -47,8 +52,8 @@ func main() {
 		Inactive: "  {{ .Name | cyan }}",
 		Selected: "\U00002728 {{ .Name | red | cyan }}",
 		Details: `
---------- Algorithm ----------
-{{ "Name:" | faint }}	{{ .Name }}`,
+	--------- Algorithm ----------
+	{{ "Name:" | faint }}	{{ .Name }}`,
 	}
 
 	searcher := func(input string, index int) bool {
@@ -132,7 +137,9 @@ func main() {
 		clearConsole()
 
 		runAlgorithm(algorithms[i].Uuid, arr, displayType, delay)
+
 	default:
+
 		fmt.Println("Invalid choice")
 		return
 	}
