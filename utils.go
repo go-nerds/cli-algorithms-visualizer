@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"math/rand"
 	"os"
@@ -141,4 +142,23 @@ func printAlgorithmDescription(algorithm int) {
 	default:
 		fmt.Println("Invalid selection")
 	}
+}
+
+func getArraySize(r *bufio.Reader) int {
+	var n int
+	for {
+		fmt.Print("Enter the size of the slice ( len(s) < 10 // recommended ): ")
+		str, err := r.ReadString('\n')
+		if err != nil {
+			fmt.Println("Error reading input: ", err)
+			continue
+		}
+		n, err = strconv.Atoi(str)
+		if err != nil {
+			fmt.Println("Input must be a number")
+			continue
+		}
+		break
+	}
+	return n
 }
