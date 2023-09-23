@@ -9,6 +9,7 @@ import (
 	"os/signal"
 	"runtime"
 	"strconv"
+	"strings"
 	"syscall"
 	"time"
 
@@ -144,7 +145,7 @@ func printAlgorithmDescription(algorithm int) {
 	}
 }
 
-func getArraySize(r *bufio.Reader) int {
+func getSliceSize(r *bufio.Reader) int {
 	var n int
 	for {
 		fmt.Print("Enter the size of the slice ( len(s) < 10 // recommended ): ")
@@ -153,7 +154,7 @@ func getArraySize(r *bufio.Reader) int {
 			fmt.Println("Error reading input: ", err)
 			continue
 		}
-		n, err = strconv.Atoi(str)
+		n, err = strconv.Atoi(strings.Trim(str, "\n"))
 		if err != nil {
 			fmt.Println("Input must be a number")
 			continue
@@ -161,4 +162,26 @@ func getArraySize(r *bufio.Reader) int {
 		break
 	}
 	return n
+}
+
+func generateSlice(r *bufio.Reader, arrSize int) []int {
+	slc := make([]int, arrSize)
+
+	for i := 0; i < arrSize; {
+		fmt.Printf("Enter element of index %d: ", i+1)
+		str, err := r.ReadString('\n')
+		if err != nil {
+			fmt.Println("Error reading element: ", err)
+			continue
+		}
+		num, err := strconv.Atoi(strings.Trim(str, "\n"))
+		if err != nil {
+			fmt.Println("Element must be a number")
+			continue
+		}
+		slc[i] = num
+		i++
+	}
+
+	return slc
 }
