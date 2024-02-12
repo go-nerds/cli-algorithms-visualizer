@@ -11,7 +11,7 @@ import (
 )
 
 type options struct {
-	SortingAlgorithm SortingAlgorithm
+	Name SortingAlgorithm
 }
 
 func main() {
@@ -25,29 +25,29 @@ func main() {
 	fmt.Println("Initial array:", arr)
 
 	algorithms := []options{
-		{SortingAlgorithm: BubbleSort},
-		{SortingAlgorithm: SelectionSort},
-		{SortingAlgorithm: InsertionSort},
-		{SortingAlgorithm: GnomeSort},
-		{SortingAlgorithm: CocktailShakerSort},
-		{SortingAlgorithm: CombSort},
-		{SortingAlgorithm: OddEvenSort},
+		{Name: BubbleSort},
+		{Name: SelectionSort},
+		{Name: InsertionSort},
+		{Name: GnomeSort},
+		{Name: CocktailShakerSort},
+		{Name: CombSort},
+		{Name: OddEvenSort},
 	}
 
 	templates := &promptui.SelectTemplates{
 		Label:    "{{ . }}?",
-		Active:   "\U00002728 {{ .SortingAlgorithm | cyan }}",
-		Inactive: "  {{ .SortingAlgorithm | cyan }}",
-		Selected: "\U00002728 {{ .SortingAlgorithm | red | cyan }}",
+		Active:   "--> {{ .Name | cyan }}",
+		Inactive: "    {{ .Name | cyan }}",
+		Selected: "--> {{ .Name | cyan }}",
 		Details: `
 --------- Algorithm ----------
-{{ "Name:" | faint }}	{{ .SortingAlgorithm }}
+{{ "Name:" | faint }}	{{ .Name }}
 `,
 	}
 
 	searcher := func(input string, index int) bool {
 		algorithm := algorithms[index]
-		name := strings.Replace(strings.ToLower(algorithm.SortingAlgorithm.String()), " ", "", -1)
+		name := strings.Replace(strings.ToLower(algorithm.Name.String()), " ", "", -1)
 		input = strings.Replace(strings.ToLower(input), " ", "", -1)
 
 		return strings.Contains(name, input)
@@ -85,7 +85,7 @@ func main() {
 
 	switch action {
 	case "Description":
-		printAlgorithmDescription(algorithms[i].SortingAlgorithm)
+		printAlgorithmDescription(algorithms[i].Name)
 	case "Run":
 		speedPrompt := promptui.Select{
 			Label: "Select Visualization Speed",
@@ -113,7 +113,7 @@ func main() {
 		}
 
 		clearConsole()
-		runAlgorithm(algorithms[i].SortingAlgorithm, arr, delay)
+		runAlgorithm(algorithms[i].Name, arr, delay)
 	default:
 		fmt.Println("Invalid choice")
 		return
