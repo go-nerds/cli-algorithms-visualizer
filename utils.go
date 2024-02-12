@@ -53,7 +53,7 @@ func visualizeIteration(array []int, idx1 int, idx2 int, delay time.Duration) {
 	clearConsole()
 }
 
-func printAlgorithmDescription(algorithm int) {
+func printAlgorithmDescription(algorithm SortingAlgorithm) {
 	switch algorithm {
 	case BubbleSort:
 		color.Bold.Println(color.Yellow.Sprint("Bubble Sort"))
@@ -105,7 +105,7 @@ func printAlgorithmDescription(algorithm int) {
 func getSliceSize(r *bufio.Reader) int {
 	var n int
 	for {
-		fmt.Print("Enter the size of the slice ( len(s) < 10 // recommended ): ")
+		fmt.Print("Enter the size of the: ")
 		str, err := r.ReadString('\n')
 		if err != nil {
 			fmt.Println("Error reading input: ", err)

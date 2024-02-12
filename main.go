@@ -10,19 +10,8 @@ import (
 	"github.com/manifoldco/promptui"
 )
 
-const (
-	BubbleSort int = iota
-	SelectionSort
-	InsertionSort
-	GnomeSort
-	CocktailShakerSort
-	CombSort
-	OddEvenSort
-)
-
 type options struct {
-	Name string
-	Id   int
+	SortingAlgorithm SortingAlgorithm
 }
 
 func main() {
@@ -36,29 +25,29 @@ func main() {
 	fmt.Println("Initial array:", arr)
 
 	algorithms := []options{
-		{Name: "Bubble Sort", Id: 1},
-		{Name: "Selection Sort", Id: 2},
-		{Name: "Insertion Sort", Id: 3},
-		{Name: "Gnome Sort", Id: 4},
-		{Name: "Cocktail Shaker Sort", Id: 5},
-		{Name: "Comb Sort", Id: 6},
-		{Name: "Odd-Even Sort", Id: 7},
+		{SortingAlgorithm: BubbleSort},
+		{SortingAlgorithm: SelectionSort},
+		{SortingAlgorithm: InsertionSort},
+		{SortingAlgorithm: GnomeSort},
+		{SortingAlgorithm: CocktailShakerSort},
+		{SortingAlgorithm: CombSort},
+		{SortingAlgorithm: OddEvenSort},
 	}
 
 	templates := &promptui.SelectTemplates{
 		Label:    "{{ . }}?",
-		Active:   "\U00002728 {{ .Name | cyan }}",
-		Inactive: "  {{ .Name | cyan }}",
-		Selected: "\U00002728 {{ .Name | red | cyan }}",
+		Active:   "\U00002728 {{ .SortingAlgorithm | cyan }}",
+		Inactive: "  {{ .SortingAlgorithm | cyan }}",
+		Selected: "\U00002728 {{ .SortingAlgorithm | red | cyan }}",
 		Details: `
 --------- Algorithm ----------
-{{ "Name:" | faint }}	{{ .Name }}
+{{ "Name:" | faint }}	{{ .SortingAlgorithm }}
 `,
 	}
 
 	searcher := func(input string, index int) bool {
 		algorithm := algorithms[index]
-		name := strings.Replace(strings.ToLower(algorithm.Name), " ", "", -1)
+		name := strings.Replace(strings.ToLower(algorithm.SortingAlgorithm.String()), " ", "", -1)
 		input = strings.Replace(strings.ToLower(input), " ", "", -1)
 
 		return strings.Contains(name, input)
@@ -96,7 +85,7 @@ func main() {
 
 	switch action {
 	case "Description":
-		printAlgorithmDescription(algorithms[i].Id)
+		printAlgorithmDescription(algorithms[i].SortingAlgorithm)
 	case "Run":
 		speedPrompt := promptui.Select{
 			Label: "Select Visualization Speed",
@@ -124,14 +113,14 @@ func main() {
 		}
 
 		clearConsole()
-		runAlgorithm(algorithms[i].Id, arr, delay)
+		runAlgorithm(algorithms[i].SortingAlgorithm, arr, delay)
 	default:
 		fmt.Println("Invalid choice")
 		return
 	}
 }
 
-func runAlgorithm(algorithm int, arr []int, delay time.Duration) {
+func runAlgorithm(algorithm SortingAlgorithm, arr []int, delay time.Duration) {
 	switch algorithm {
 	case BubbleSort:
 		bubbleSortVisualizer(arr, delay)
