@@ -11,38 +11,38 @@ import (
 )
 
 const (
-	BubbleSort         int = 1
-	SelectionSort      int = 2
-	InsertionSort      int = 3
-	GnomeSort          int = 4
-	CocktailShakerSort int = 5
-	CombSort           int = 6
-	OddEvenSort        int = 7
+	BubbleSort int = iota
+	SelectionSort
+	InsertionSort
+	GnomeSort
+	CocktailShakerSort
+	CombSort
+	OddEvenSort
 )
 
 type options struct {
 	Name string
-	Uuid int
+	Id   int
 }
 
 func main() {
 	clearConsole()
-	handleInterrupt()
 
 	r := bufio.NewReader(os.Stdin)
 	n := getSliceSize(r)
-	arr := generateSlice(r, n)
+	arr := make([]int, 0, n)
+	fillSliceWithRandElems(&arr)
 
 	fmt.Println("Initial array:", arr)
 
 	algorithms := []options{
-		{Name: "Bubble Sort", Uuid: 1},
-		{Name: "Selection Sort", Uuid: 2},
-		{Name: "Insertion Sort", Uuid: 3},
-		{Name: "Gnome Sort", Uuid: 4},
-		{Name: "Cocktail Shaker Sort", Uuid: 5},
-		{Name: "Comb Sort", Uuid: 6},
-		{Name: "Odd-Even Sort", Uuid: 7},
+		{Name: "Bubble Sort", Id: 1},
+		{Name: "Selection Sort", Id: 2},
+		{Name: "Insertion Sort", Id: 3},
+		{Name: "Gnome Sort", Id: 4},
+		{Name: "Cocktail Shaker Sort", Id: 5},
+		{Name: "Comb Sort", Id: 6},
+		{Name: "Odd-Even Sort", Id: 7},
 	}
 
 	templates := &promptui.SelectTemplates{
@@ -51,8 +51,9 @@ func main() {
 		Inactive: "  {{ .Name | cyan }}",
 		Selected: "\U00002728 {{ .Name | red | cyan }}",
 		Details: `
-	--------- Algorithm ----------
-	{{ "Name:" | faint }}	{{ .Name }}`,
+--------- Algorithm ----------
+{{ "Name:" | faint }}	{{ .Name }}
+`,
 	}
 
 	searcher := func(input string, index int) bool {
@@ -74,7 +75,7 @@ func main() {
 	i, _, err := algorithmPrompt.Run()
 
 	if err != nil {
-		fmt.Printf("Prompt failed %v\n", err)
+		fmt.Printf("Prompt failed: %s\n", err.Error())
 		return
 	}
 
@@ -93,20 +94,9 @@ func main() {
 
 	clearConsole()
 
-	displayPrompt := promptui.Select{
-		Label: "Select Type of displaying",
-		Items: []string{"Array", "Graph"},
-	}
-
-	_, displayType, err := displayPrompt.Run()
-	if err != nil {
-		fmt.Printf("Prompt failed %v\n", err)
-		return
-	}
-
 	switch action {
 	case "Description":
-		printAlgorithmDescription(algorithms[i].Uuid)
+		printAlgorithmDescription(algorithms[i].Id)
 	case "Run":
 		speedPrompt := promptui.Select{
 			Label: "Select Visualization Speed",
@@ -122,44 +112,41 @@ func main() {
 		var delay time.Duration
 		switch speed {
 		case "Slow":
-			delay = time.Second * 2
+			delay = time.Millisecond * 1500
 		case "Medium":
 			delay = time.Second
 		case "Fast":
-			delay = time.Second / 3
+			delay = time.Second / 2
 		case "Very Fast":
-			delay = time.Second / 6
+			delay = time.Second / 4
 		default:
 			delay = time.Second
 		}
 
 		clearConsole()
-
-		runAlgorithm(algorithms[i].Uuid, arr, displayType, delay)
-
+		runAlgorithm(algorithms[i].Id, arr, delay)
 	default:
-
 		fmt.Println("Invalid choice")
 		return
 	}
 }
 
-func runAlgorithm(algorithm int, arr []int, displayType string, delay time.Duration) {
+func runAlgorithm(algorithm int, arr []int, delay time.Duration) {
 	switch algorithm {
 	case BubbleSort:
-		bubbleSortVisualizer(arr, displayType, delay)
+		bubbleSortVisualizer(arr, delay)
 	case SelectionSort:
-		selectionSortVisualizer(arr, displayType, delay)
+		selectionSortVisualizer(arr, delay)
 	case InsertionSort:
-		insertionSortVisualizer(arr, displayType, delay)
+		insertionSortVisualizer(arr, delay)
 	case GnomeSort:
-		gnomeSortVisualizer(arr, displayType, delay)
+		gnomeSortVisualizer(arr, delay)
 	case CocktailShakerSort:
-		cocktailShakerSortVisualizer(arr, displayType, delay)
+		cocktailShakerSortVisualizer(arr, delay)
 	case CombSort:
-		combSortVisualizer(arr, displayType, delay)
+		combSortVisualizer(arr, delay)
 	case OddEvenSort:
-		oddEvenSortVisualizer(arr, displayType, delay)
+		oddEvenSortVisualizer(arr, delay)
 	default:
 		fmt.Println("Invalid selection")
 	}

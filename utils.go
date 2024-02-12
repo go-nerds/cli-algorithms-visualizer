@@ -3,17 +3,15 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math/rand"
 	"os"
 	"os/exec"
-	"os/signal"
 	"runtime"
 	"strconv"
 	"strings"
-	"syscall"
 	"time"
 
 	"github.com/gookit/color"
-	"github.com/pterm/pterm"
 )
 
 type Color int
@@ -49,42 +47,10 @@ func printColoredArray(array []int, idx1, idx2 int) {
 
 }
 
-func handleInterrupt() {
-	channel := make(chan os.Signal, 1)
-	signal.Notify(channel, os.Interrupt, syscall.SIGTERM)
-	go func() {
-		<-channel
-		clearConsole()
-		fmt.Println("Exiting.")
-		os.Exit(0)
-	}()
-}
-
-func visualizeIteration(array []int, idx1 int, idx2 int, displayType string, delay time.Duration) {
-	if displayType == "Graph" {
-		printGraph(array)
-	} else if displayType == "Array" {
-		printColoredArray(array, idx1, idx2)
-	}
+func visualizeIteration(array []int, idx1 int, idx2 int, delay time.Duration) {
+	printColoredArray(array, idx1, idx2)
 	time.Sleep(delay)
 	clearConsole()
-}
-
-func printGraph(array []int) {
-	area, _ := pterm.DefaultArea.Start()
-	defer area.Stop()
-
-	bars := pterm.Bars{}
-
-	for i, data := range array {
-		bar := pterm.Bar{Label: strconv.Itoa(i), Value: data}
-		bars = append(bars, bar)
-	}
-
-	barchart := pterm.DefaultBarChart.WithBars(bars)
-
-	content, _ := barchart.WithWidth(35).WithShowValue().Srender()
-	area.Update(content)
 }
 
 func printAlgorithmDescription(algorithm int) {
@@ -155,24 +121,8 @@ func getSliceSize(r *bufio.Reader) int {
 	return n
 }
 
-func generateSlice(r *bufio.Reader, arrSize int) []int {
-	slc := make([]int, arrSize)
-
-	for i := 0; i < arrSize; {
-		fmt.Printf("Enter element of index %d: ", i+1)
-		str, err := r.ReadString('\n')
-		if err != nil {
-			fmt.Println("Error reading element: ", err)
-			continue
-		}
-		num, err := strconv.Atoi(strings.Trim(str, "\n"))
-		if err != nil {
-			fmt.Println("Element must be a number")
-			continue
-		}
-		slc[i] = num
-		i++
+func fillSliceWithRandElems(s *[]int) {
+	for i := 0; i < cap(*s); i++ {
+		*s = append(*s, rand.Intn(cap(*s)*10))
 	}
-
-	return slc
 }
